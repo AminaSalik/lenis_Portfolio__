@@ -16,10 +16,6 @@ duration: 1
 }); /* , "-=1" */
 
 /* HOME PAGE CONTENT ANIMATION */
-tl.fromTo(".big-text",
-      {opacity: 0 },
-      { opacity: 1, duration: 1 },
-      "-=1");
 
 
 

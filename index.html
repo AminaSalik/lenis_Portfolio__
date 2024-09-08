@@ -14,9 +14,8 @@
 		<link rel="stylesheet" href="https://use.typekit.net/eay5gla.css">
 		<link rel="stylesheet" type="text/css" href="./assets/css//base.css" />
         <link rel="stylesheet" type="text/css" href="./assets/css/contact.css" />
-		<script>document.documentElement.className="js";</script>
-		<script src="//tympanus.net/codrops/adpacks/analytics.js"></script>
-    <title>Slide Animation</title>
+	
+	
   </head>
 
   <body>
@@ -74,7 +73,7 @@
                         <div id="item-5" class="content">
                             <div class="content__img-wrap">
                                 <div class="content__img content__img--5">
-                                    <div class="content__img-inner" style="background-image:url(img/16.jpg);"></div>
+                                    <div class="content__img-inner" style="background-image:url(img/profil.png);"></div>
                                     <div class="content__img-inner content__img-inner--hidden" style="background-image:url(./assets/img/profil.png);"></div>
                                 </div>
                             </div>
@@ -148,7 +147,7 @@
    
   </body>
   
-  <script src="https://tympanus.net/codrops/adpacks/cda_sponsor.js"></script>
+  <!-- <script src="https://tympanus.net/codrops/adpacks/cda_sponsor.js"></script> -->
   <script src="./assets/js/imagesloaded.pkgd.min.js"></script>
   <script src="./assets/js/splitting.min.js"></script>
   <script src="./assets/js/gsap.min.js"></script>
@@ -157,5 +156,167 @@
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.8.0"></script>
   <script type="module" src="./assets/js/index.js"></script>
   <script src="./assets/js/intro.js"></script>
+<script>
+  // Preloading all images specified by the selector
+preloadImages('.content__img-inner').then(() => {
+    // Once images are preloaded, remove the 'loading' indicator/class from the body
+    document.body.classList.remove('loading');
+	// Initialize Lenis
+	initSmoothScrolling();
+	// Apply scroll-triggered animations to each item
+	scroll();
+});
 
+tsParticles.load("tsparticles", {
+    background: {
+        repeat: "no-repeat",
+        size: "40%",
+        position: "60% 50%"
+    },
+    interactivity: {
+        events: {
+            onClick: {
+                enable: true,
+                mode: "repulse"
+            },
+            onHover: {
+                enable: true,
+                mode: "bubble"
+            }
+        },
+        modes: {
+            bubble: {
+                distance: 200,
+                duration: 2,
+                opacity: 0,
+                size: 0,
+                speed: 3
+            },
+            repulse: {
+                distance: 400,
+                duration: 0.4
+            }
+        }
+    },
+    particles: {
+        color: { value: "#ff98a2" },
+        move: {
+            direction: "none",
+            enable: true,
+            outModes: "out",
+            random: true,
+            speed: 0.3
+        },
+        number: {
+            density: {
+                enable: true
+            },
+            value: 900
+        },
+        opacity: {
+            animation: {
+                enable: true,
+                speed: 5
+            },
+            value: { min: 0.3, max: 0.6 }
+        },
+        shape: {
+            type: "circle"
+        },
+        size: {
+            value: 1
+        }
+    }
+});
+
+
+tsParticles.load("tsparticle", {
+    background: {
+        repeat: "no-repeat",
+        size: "40%",
+        position: "60% 50%"
+    },
+    interactivity: {
+        events: {
+            onClick: {
+                enable: true,
+                mode: "repulse"
+            },
+            onHover: {
+                enable: true,
+                mode: "bubble"
+            }
+        },
+        modes: {
+            bubble: {
+                distance: 200,
+                duration: 2,
+                opacity: 0,
+                size: 0,
+                speed: 3
+            },
+            repulse: {
+                distance: 400,
+                duration: 0.4
+            }
+        }
+    },
+    particles: {
+        color: { value: "#ff98a2" },
+        move: {
+            direction: "none",
+            enable: true,
+            outModes: "out",
+            random: true,
+            speed: 0.3
+        },
+        number: {
+            density: {
+                enable: true
+            },
+            value: 900
+        },
+        opacity: {
+            animation: {
+                enable: true,
+                speed: 5
+            },
+            value: { min: 0.3, max: 0.6 }
+        },
+        shape: {
+            type: "circle"
+        },
+        size: {
+            value: 1
+        }
+    }
+});
+
+
+
+
+// ======================= cursor
+const cursor = document.querySelector('#cursor');
+let mouse = { x: 300, y: 300 };
+let pos = { x: 0, y: 0 };
+const speed = 0.1; // between 0 and 1
+
+const updatePosition = () => {
+    pos.x += (mouse.x - pos.x) * speed;
+    pos.y += (mouse.y - pos.y) * speed;
+    cursor.style.transform = 'translate3d(' + pos.x + 'px ,' + pos.y + 'px, 0)';
+};
+const updateCoordinates = e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+}
+window.addEventListener('mousemove', updateCoordinates);
+function loop() {
+    updatePosition();
+    requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(loop);
+
+</script>
 </html>

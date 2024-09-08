@@ -595,14 +595,7 @@ const fxIntro = (itemElement, options) => {
 const scroll = () => {
 	// Define items and associate them with their animation profiles and options
 	const items = [
-		{
-			id: '#item-1', 
-			animationProfile: fx1,
-			interactiveTilt: true, // This item should have the InteractiveTilt effect
-			options: {
-				perspective: 1000
-			} 
-		},
+		
 		{
 			id: '#item-2',
 			animationProfile: fx2,
@@ -647,28 +640,7 @@ const scroll = () => {
 				perspective: 400
 			} 
 		},
-		{
-			id: '#item-4',
-			animationProfile: fx4,
-			interactiveTilt: true, // This item should have the InteractiveTilt effect
-			options: {
-				clipPaths: {
-					step1: {
-						initial: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-						final: 'polygon(40% 50%, 60% 50%, 80% 50%, 20% 50%)',
-					},
-					step2: {
-						initial: 'polygon(20% 50%, 80% 50%, 60% 50%, 40% 50%)',
-						final: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-					}
-				},
-				scrollTrigger: {
-					start: 'center bottom',
-					end: 'top top-=10%'
-				},
-				perspective: 500
-			} 
-		},
+		
 		{
 			id: '#item-5',
 			animationProfile: fx5,
@@ -691,24 +663,7 @@ const scroll = () => {
 				perspective: 500
 			} 
 		},
-		{
-			id: '#item-6', 
-			animationProfile: fx6,
-			interactiveTilt: true, // This item should have the InteractiveTilt effect
-			options: {
-				clipPaths: {
-					step1: {
-						initial: 'polygon(50% 0%, 50% 50%, 50% 50%, 50% 100%)',
-						final: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
-					},
-				},
-				scrollTrigger: {
-					start: 'center bottom',
-					end: '+=80%'
-				},
-				perspective: 1000
-			} 
-		},
+		
 		{
 			id: '#item-intro', 
 			animationProfile: fxIntro,
@@ -743,163 +698,3 @@ const scroll = () => {
 	});
 }
 
-// Preloading all images specified by the selector
-preloadImages('.content__img-inner').then(() => {
-    // Once images are preloaded, remove the 'loading' indicator/class from the body
-    document.body.classList.remove('loading');
-	// Initialize Lenis
-	initSmoothScrolling();
-	// Apply scroll-triggered animations to each item
-	scroll();
-});
-
-tsParticles.load("tsparticles", {
-    background: {
-        repeat: "no-repeat",
-        size: "40%",
-        position: "60% 50%"
-    },
-    interactivity: {
-        events: {
-            onClick: {
-                enable: true,
-                mode: "repulse"
-            },
-            onHover: {
-                enable: true,
-                mode: "bubble"
-            }
-        },
-        modes: {
-            bubble: {
-                distance: 200,
-                duration: 2,
-                opacity: 0,
-                size: 0,
-                speed: 3
-            },
-            repulse: {
-                distance: 400,
-                duration: 0.4
-            }
-        }
-    },
-    particles: {
-        color: { value: "#ff98a2" },
-        move: {
-            direction: "none",
-            enable: true,
-            outModes: "out",
-            random: true,
-            speed: 0.3
-        },
-        number: {
-            density: {
-                enable: true
-            },
-            value: 900
-        },
-        opacity: {
-            animation: {
-                enable: true,
-                speed: 5
-            },
-            value: { min: 0.3, max: 0.6 }
-        },
-        shape: {
-            type: "circle"
-        },
-        size: {
-            value: 1
-        }
-    }
-});
-
-
-tsParticles.load("tsparticle", {
-    background: {
-        repeat: "no-repeat",
-        size: "40%",
-        position: "60% 50%"
-    },
-    interactivity: {
-        events: {
-            onClick: {
-                enable: true,
-                mode: "repulse"
-            },
-            onHover: {
-                enable: true,
-                mode: "bubble"
-            }
-        },
-        modes: {
-            bubble: {
-                distance: 200,
-                duration: 2,
-                opacity: 0,
-                size: 0,
-                speed: 3
-            },
-            repulse: {
-                distance: 400,
-                duration: 0.4
-            }
-        }
-    },
-    particles: {
-        color: { value: "#ff98a2" },
-        move: {
-            direction: "none",
-            enable: true,
-            outModes: "out",
-            random: true,
-            speed: 0.3
-        },
-        number: {
-            density: {
-                enable: true
-            },
-            value: 900
-        },
-        opacity: {
-            animation: {
-                enable: true,
-                speed: 5
-            },
-            value: { min: 0.3, max: 0.6 }
-        },
-        shape: {
-            type: "circle"
-        },
-        size: {
-            value: 1
-        }
-    }
-});
-
-
-
-
-// ======================= cursor
-const cursor = document.querySelector('#cursor');
-let mouse = { x: 300, y: 300 };
-let pos = { x: 0, y: 0 };
-const speed = 0.1; // between 0 and 1
-
-const updatePosition = () => {
-    pos.x += (mouse.x - pos.x) * speed;
-    pos.y += (mouse.y - pos.y) * speed;
-    cursor.style.transform = 'translate3d(' + pos.x + 'px ,' + pos.y + 'px, 0)';
-};
-const updateCoordinates = e => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-}
-window.addEventListener('mousemove', updateCoordinates);
-function loop() {
-    updatePosition();
-    requestAnimationFrame(loop);
-}
-
-requestAnimationFrame(loop);
