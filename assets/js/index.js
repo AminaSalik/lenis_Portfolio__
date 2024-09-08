@@ -1,10 +1,10 @@
-// Import the necessary function for preloading images
-import { preloadImages, getGrid } from './utils.js';
+import { preloadImages } from './utils.js'; // Utility function for preloading images
+import { InteractiveTilt } from './interactive-tilt.js';
 
-// Define a variable that will store the Lenis smooth scrolling object
+// Define a variable to store the Lenis smooth scrolling object
 let lenis;
 
-// Function to initialize Lenis for smooth scrolling
+// Initializes Lenis for smooth scrolling with specific properties
 const initSmoothScrolling = () => {
 	// Instantiate the Lenis object with specified properties
 	lenis = new Lenis({
@@ -24,270 +24,882 @@ const initSmoothScrolling = () => {
 	requestAnimationFrame(scrollFn);
 };
 
-// All elements with class .grid
-const grids = document.querySelectorAll('.grid');
-
-// Function to apply scroll-triggered animations to a given gallery
-const applyAnimation = (grid, animationType) => {
-	// Child elements of grid
-	const gridWrap = grid.querySelector('.grid-wrap');
-	const gridItems = grid.querySelectorAll('.grid__item');
-	const gridItemsInner = [...gridItems].map(item => item.querySelector('.grid__item-inner'));
-	
-	// Define GSAP timeline with ScrollTrigger
-	const timeline = gsap.timeline({
-	  	defaults: { ease: 'none' },
-	  	scrollTrigger: {
-			trigger: gridWrap,
-			start: 'top bottom+=5%',
-			end: 'bottom top-=5%',
-			scrub: true
-	  	}
-	});
-	
-	// Apply different animations based on type
-	switch(animationType) {
-		
-		case 'type1':
-
-			// Set some CSS related style values
-			grid.style.setProperty('--perspective', '1000px');
-			grid.style.setProperty('--grid-inner-scale', '0.5');
-
-			timeline
-			.set(gridWrap, {
-				rotationY: 25
-			})
-			.set(gridItems, {
-				z: () => gsap.utils.random(-1600,200)
-			})
-			.fromTo(gridItems, {
-				xPercent: () => gsap.utils.random(-1000,-500)
-			}, {
-				xPercent: () => gsap.utils.random(500,1000)
-			}, 0)
-			.fromTo(gridItemsInner, {
-				scale: 2
-			}, {
-				scale: .5
-			}, 0)
-			
-			break;
-
-	  	case 'type2':
-			
-			// Set some CSS related style values
-			grid.style.setProperty('--grid-width', '160%');
-			grid.style.setProperty('--perspective', '2000px');
-			grid.style.setProperty('--grid-inner-scale', '0.5');
-			grid.style.setProperty('--grid-item-ratio', '0.8');
-			grid.style.setProperty('--grid-columns', '6');
-			grid.style.setProperty('--grid-gap', '14vw');
-
-		  	timeline
-		  	.set(gridWrap, {
-				rotationX: 20
-			})
-			.set(gridItems, {
-				z: () => gsap.utils.random(-3000,-1000)
-			})
-			.fromTo(gridItems, {
-				yPercent: () => gsap.utils.random(100,1000),
-				rotationY: -45,
-				filter: 'brightness(200%)'
-			}, {
-				ease: 'power2',
-				yPercent: () => gsap.utils.random(-1000,-100),
-				rotationY: 45,
-				filter: 'brightness(0%)'
-			}, 0)
-			.fromTo(gridWrap, {
-				rotationZ: -5,
-			}, {
-				rotationX: -20,
-				rotationZ: 10,
-				scale: 1.2
-			}, 0)
-			.fromTo(gridItemsInner, {
-				scale: 2
-			}, {
-				scale: 0.5
-			}, 0)
-
-			break;
-	  
-		case 'type3':
-			
-			// Set some CSS related style values
-			grid.style.setProperty('--grid-width', '105%');
-			grid.style.setProperty('--grid-columns', '8');
-			grid.style.setProperty('--perspective', '1500px');
-			grid.style.setProperty('--grid-inner-scale', '0.5');
-			
-			timeline
-			.set(gridItems, {
-				transformOrigin: '50% 0%',
-				z: () => gsap.utils.random(-5000,-2000),
-				rotationX: () => gsap.utils.random(-65,-25),
-				filter: 'brightness(0%)'
-			})	
-			.to(gridItems, {
-				xPercent: () => gsap.utils.random(-150,150),
-				yPercent: () => gsap.utils.random(-300,300),
-				rotationX: 0,
-				filter: 'brightness(200%)'
-			}, 0)
-			.to(gridWrap, {
-				z: 6500
-			}, 0)
-			.fromTo(gridItemsInner, {
-				scale: 2
-			}, {
-				scale: 0.5
-			}, 0);
-			
-			break;
-
-		case 'type4':
-			
-			// Set some CSS related style values
-			grid.style.setProperty('--grid-width', '50%');
-			grid.style.setProperty('--perspective', '3000px');
-			grid.style.setProperty('--grid-item-ratio', '0.8');
-			grid.style.setProperty('--grid-columns', '3');
-			grid.style.setProperty('--grid-gap', '1vw');
-
-			timeline
-			.set(gridWrap, {
-				transformOrigin: '0% 50%',
-				rotationY: 30,
-				xPercent: -75
-			})
-			.set(gridItems, {
-				transformOrigin: '50% 0%'
-			})
-			.to(gridItems, {
-				duration: 0.5,
-				ease: 'power2',
-				z: 500,
-				stagger: 0.04
-			}, 0)
-			.to(gridItems, {
-				duration: 0.5,
-				ease: 'power2.in',
-				z: 0,
-				stagger: 0.04
-			}, 0.5)
-			.fromTo(gridItems, {
-				rotationX: -70,
-				filter: 'brightness(120%)'
-			}, {
-				duration: 1,
-				rotationX: 70,
-				filter: 'brightness(0%)',
-				stagger: 0.04
-			}, 0)
-			
-			break;
-
-		case 'type5':
-
-			// Set some CSS related style values
-			grid.style.setProperty('--grid-width', '120%');
-			grid.style.setProperty('--grid-columns', '8');
-			grid.style.setProperty('--grid-gap', '0');
-			
-			const gridObj = getGrid(gridItems);
-
-			timeline
-			.set(gridWrap, {
-				rotationX: 50
-			})
-			.to(gridWrap, {
-				rotationX: 30
-			})
-			.fromTo(gridItems, {
-				filter: 'brightness(0%)'
-			}, {
-				filter: 'brightness(100%)'
-			}, 0)
-			.to(gridObj.rows('even'), {
-				xPercent: -100,
-				ease: 'power1'
-			}, 0)
-			.to(gridObj.rows('odd'), {
-				xPercent: 100,
-				ease: 'power1'
-			}, 0)
-			.addLabel('rowsEnd', '>-=0.15')
-			.to(gridItems, {
-				ease: 'power1',
-				yPercent: () => gsap.utils.random(-100, 200),
-			}, 'rowsEnd');
-			break;
-
-		case 'type6':
-
-			// Set some CSS related style values
-			grid.style.setProperty('--perspective', '2500px');
-			grid.style.setProperty('--grid-width', '100%');
-			grid.style.setProperty('--grid-gap', '6');
-			grid.style.setProperty('--grid-columns', '3');
-			grid.style.setProperty('--grid-item-ratio', '1');
-			
-			timeline
-			.fromTo(gridItems, {
-				transformOrigin: '50% 200%',
-				rotationX: 0,
-				yPercent: 400,
-			}, {
-				yPercent: 0,
-				rotationY: 360,
-				opacity: 0.2,
-				scale: 0.8,
-				stagger: 0.03,
-			})
-
-			break;
-	  	
-		default:
-			console.error('Unknown animation type.');
-			break;
+// Sets up default animation settings and merges with options
+const setupAnimationDefaults = (itemElement, options) => {
+	// Default settings for clip paths and scroll trigger
+	let defaults = {
+	  	clipPaths: {
+			step1: {
+				initial: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+				final: 'polygon(50% 0%, 50% 50%, 50% 50%, 50% 100%)',
+			},
+			step2: {
+				initial: 'polygon(50% 50%, 50% 0%, 50% 100%, 50% 50%)',
+				final: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+			}
+	  	},
+		// Default scroll trigger settings
+		scrollTrigger: {
+			trigger: itemElement,
+			start: 'top 50%',
+			end: '+=50%',
+			scrub: true,
+		},
+		// Default perspective setting
+	  	perspective: false
+	};
+  
+	// Merge defaults with options provided
+	if (options && options.scrollTrigger) {
+		defaults.scrollTrigger = {
+			...defaults.scrollTrigger,
+			...options.scrollTrigger
+		};
 	}
+  
+	// Merge and return the complete settings
+	return {
+		...defaults,
+		...options,
+		scrollTrigger: defaults.scrollTrigger
+	};
+};  
+
+// Prepares text within an element for animation by splitting it into characters and setting their initial opacity.
+const prepareTextForAnimation = itemElement => {
+	// Query for the span elements within the itemElement
+	const textSpans = itemElement.querySelectorAll('.content__text > span');
+  
+	// Perform the splitting operation
+	Splitting({ target: textSpans });
+  
+	// Initialize an array to hold arrays of characters for each span
+	const charsArray = Array.from(textSpans).map(span => {
+	  // Query for chars inside this span and return them as an array
+	  return Array.from(span.querySelectorAll('.char'));
+	});
+  
+	// Set the opacity of all characters to 0 using GSAP
+	charsArray.forEach(charArray => {
+		gsap.set(charArray, { opacity: 0 });
+	});
+	
+	// Return the charsArray
+	return charsArray;
+};
+
+// Animation profiles for each item
+
+// First animation effect
+const fx1 = (itemElement, options) => {
+	// Set up the animation settings
+	const settings = setupAnimationDefaults(itemElement, options);
+	// Select the elements to animate
+	const imageElement = itemElement.querySelector('.content__img');
+	const innerElements = imageElement.querySelectorAll('.content__img-inner'); // Now it selects both inners
+	// Prepare the text for animation and retrieve the character arrays
+	const charsArray = prepareTextForAnimation(itemElement);
+
+	// Define and return the GSAP timeline for the animation
+	const tl = gsap.timeline({
+		// Default easing for all animations in this timeline
+		defaults: {
+			ease: 'none'
+		},
+		// Event hook for when the timeline starts
+		onStart: () => {
+			// Apply perspective if specified
+			if ( settings.perspective ) {
+				gsap.set(imageElement, {
+					perspective: settings.perspective
+				});
+			}
+		},
+		// ScrollTrigger configuration for this timeline
+		scrollTrigger: settings.scrollTrigger
+	})
+	// The sequence of animation steps
+	.fromTo(imageElement, {
+		// Initial state for the animation
+		filter: 'brightness(100%)',
+		'clip-path': settings.clipPaths.step1.initial
+	}, {
+		ease: 'sine.in',
+		// Final state for the animation
+		filter: 'brightness(800%)',
+		'clip-path': settings.clipPaths.step1.final
+	}, 0)
+	.to(innerElements[0], {
+		ease: 'sine.in',
+		// Rotation and scale effect for the inner element
+		rotationY: -40,
+		scale: 1.4,
+	}, 0)
+	// Switch image
+	.add(() => {
+		// Toggle the visibility of the inner elements
+		innerElements[0].classList.toggle('content__img-inner--hidden');
+		innerElements[1].classList.toggle('content__img-inner--hidden');
+	})
+	.to(imageElement, {
+		// Start state for the next animation step
+		startAt: {
+			'clip-path': settings.clipPaths.step2.initial
+		},
+		// Final state for the next animation step
+		'clip-path': settings.clipPaths.step2.final,
+		filter: 'brightness(100%)'
+	})
+	.to(innerElements[1], {
+		// Start state for rotation and scale reset
+		startAt: {rotationY: 40, scale: 1.4},
+		// Reset rotation and scale to original
+		rotationY: 0,
+		scale: 1,
+	}, '<') // '<' indicates that this step starts at the same time as the previous one
+	.addLabel('texts', '<-=0.3');
+
+	charsArray.forEach((charArray, index) => {
+		const staggerDirection = index % 2 === 0 ? 1 : -1; // Alternate stagger direction
+
+		tl.to(charArray, {
+			startAt: {opacity: 1, scale: .2},
+			opacity: 1,
+			scale: 1,
+			yPercent: -staggerDirection*40,
+			stagger: staggerDirection*0.04
+		}, 'texts');
+	});
+
+	return tl;
 }
 
-// Apply animations to each grid
+const fx2 = (itemElement, options) => {
+	// Set up the animation settings
+	const settings = setupAnimationDefaults(itemElement, options);
+	// Select the elements to animate
+	const imageElement = itemElement.querySelector('.content__img');
+	const innerElements = imageElement.querySelectorAll('.content__img-inner'); // Now it selects both inners
+	const charsArray = prepareTextForAnimation(itemElement);
+
+	const tl = gsap.timeline({
+		defaults: {
+			ease: 'none'
+		},
+		onStart: () => {
+			if ( settings.perspective ) {
+				gsap.set([imageElement, itemElement], {
+					perspective: settings.perspective
+				});
+			}
+		},
+		scrollTrigger: settings.scrollTrigger
+	})
+	.fromTo(imageElement, {
+		filter: 'brightness(100%) hue-rotate(0deg)',
+		'clip-path': settings.clipPaths.step1.initial
+	}, {
+		filter: 'brightness(800%) hue-rotate(90deg)',
+		'clip-path': settings.clipPaths.step1.final
+	}, 0)
+	.to(innerElements[0], {
+		rotationZ: -5,
+		scaleX: 1.8,
+	}, 0)
+	// Switch image
+	.add(() => {
+		// Toggle the visibility of the inner elements
+		innerElements[0].classList.toggle('content__img-inner--hidden');
+		innerElements[1].classList.toggle('content__img-inner--hidden');
+	})
+	.to(imageElement, {
+		startAt: {
+			'clip-path': settings.clipPaths.step2.initial
+		},
+		'clip-path': settings.clipPaths.step2.final,
+		filter: 'brightness(100%) hue-rotate(0deg)'
+	})
+	.to(innerElements[1], {
+		startAt: {rotationZ: 5, scaleX: 1.8},
+		rotationZ: 0,
+		scaleX: 1,
+	}, '<')
+	.addLabel('texts', '<-=0.3');
+
+	charsArray.forEach((charArray, index) => {
+		charArray.sort(() => Math.random() - 0.5);
+		const staggerDirection = index % 2 === 0 ? 1 : -1; // Alternate stagger direction
+
+		tl.to(charArray, {
+			duration: 0.1,
+			opacity: 1,
+			stagger: staggerDirection*0.04
+		}, 'texts');
+	});
+
+	return tl;
+}
+
+const fx3 = (itemElement, options) => {
+	// Set up the animation settings
+	const settings = setupAnimationDefaults(itemElement, options);
+	// Select the elements to animate
+	const imageElement = itemElement.querySelector('.content__img');
+	const innerElements = imageElement.querySelectorAll('.content__img-inner'); // Now it selects both inners
+	const text = itemElement.querySelector('.content__text');
+	
+	return gsap.timeline({
+		defaults: {
+			ease: 'none'
+		},
+		onStart: () => {
+			if ( settings.perspective ) {
+				gsap.set([imageElement, itemElement], {
+					perspective: settings.perspective
+				});
+			}
+		},
+		scrollTrigger: settings.scrollTrigger
+	})
+	.fromTo(imageElement, {
+		scale: 0.3,
+		filter: 'brightness(100%) contrast(100%)',
+		'clip-path': settings.clipPaths.step1.initial
+	}, {
+		ease: 'sine',
+		rotationX: -35,
+		rotationY: 35,
+		filter: 'brightness(60%) contrast(400%)',
+		scale: 0.7,
+		'clip-path': settings.clipPaths.step1.final
+	}, 0)
+	.to(innerElements[0], {
+		ease: 'sine',
+		skewY: 10,
+		scaleY: 1.2,
+	}, 0)
+	
+	// Switch image
+	.add(() => {
+		// Toggle the visibility of the inner elements
+		innerElements[0].classList.toggle('content__img-inner--hidden');
+		innerElements[1].classList.toggle('content__img-inner--hidden');
+	}, '>')
+	.to(imageElement, {
+		ease: 'sine.in',
+		startAt: {
+			'clip-path': settings.clipPaths.step2.initial
+		},
+		'clip-path': settings.clipPaths.step2.final,
+		filter: 'brightness(100%) contrast(100%)',
+		scale: 1,
+		rotationX: 0,
+		rotationY: 0,
+	}, '<')
+	.to(innerElements[1], {
+		ease: 'sine.in',
+		startAt: {skewY: 10, scaleY: 2},
+		skewY: 0,
+		scaleY: 1,
+	}, '<')
+
+	.fromTo(text, {
+		opacity: 0,
+		yPercent: 40,
+	}, {
+		opacity: 1,
+		yPercent: 0,
+	}, '>')
+	.to(imageElement, {
+		ease: 'sine',
+		startAt: {filter: 'brightness(100%) contrast(100%) opacity(100%)'},
+		filter: 'brightness(60%) contrast(400%) opacity(0%)',
+		rotationX: 25,
+		rotationY: 2,
+		scale: 1.2
+	}, '<')
+}
+
+const fx4 = (itemElement, options) => {
+	// Set up the animation settings
+	const settings = setupAnimationDefaults(itemElement, options);
+	// Select the elements to animate
+	const imageElement = itemElement.querySelector('.content__img');
+	const innerElements = imageElement.querySelectorAll('.content__img-inner'); // Now it selects both inners
+	// Prepare the text for animation and retrieve the character arrays
+	const charsArray = prepareTextForAnimation(itemElement);
+
+	const tl = gsap.timeline({
+		defaults: {
+			ease: 'power1.inOut'
+		},
+		onStart: () => {
+			if ( settings.perspective ) {
+				gsap.set([imageElement, itemElement], {
+					perspective: settings.perspective
+				});
+			}
+		},
+		scrollTrigger: settings.scrollTrigger
+	})
+	.fromTo(imageElement, {
+		filter: 'brightness(100%) grayscale(0%)',
+		'clip-path': settings.clipPaths.step1.initial
+	}, {
+		rotationZ: 90,
+		scale: 0.6,
+		filter: 'brightness(800%) grayscale(100%)',
+		'clip-path': settings.clipPaths.step1.final
+	}, 0)
+	.to(innerElements[0], {
+		rotationZ: -5,
+		scaleX: 1.4,
+	}, 0)
+	// Switch image
+	.add(() => {
+		// Toggle the visibility of the inner elements
+		innerElements[0].classList.toggle('content__img-inner--hidden');
+		innerElements[1].classList.toggle('content__img-inner--hidden');
+	})
+	.to(imageElement, {
+		startAt: {
+			'clip-path': settings.clipPaths.step1.final, rotationZ: -90
+		},
+		'clip-path': settings.clipPaths.step2.final,
+		filter: 'brightness(100%) grayscale(0%)',
+		rotationZ: 0,
+		scale: 1,
+	})
+	.to(innerElements[1], {
+		startAt: {rotationZ: -350, scaleX: 1.4},
+		rotationZ: -360,
+		scaleX: 1,
+	}, '<')
+	.addLabel('texts', '<-=0.3');
+
+	charsArray.forEach((charArray, index) => {
+		const staggerDirection = index % 2 === 0 ? 1 : -1; // Alternate stagger direction
+
+		tl.to(charArray, {
+			startAt: {opacity: 1, scale: .2},
+			opacity: 1,
+			scale: 1,
+			yPercent: staggerDirection*400,
+			stagger: staggerDirection*0.02
+		}, 'texts');
+	});
+
+	return tl;
+}
+
+const fx5 = (itemElement, options) => {
+	// Set up the animation settings
+	const settings = setupAnimationDefaults(itemElement, options);
+	// Select the elements to animate
+	const imageElement = itemElement.querySelector('.content__img');
+	const innerElements = imageElement.querySelectorAll('.content__img-inner'); // Now it selects both inners
+	const charsArray = prepareTextForAnimation(itemElement);
+
+	const tl = gsap.timeline({
+		defaults: {
+			ease: 'back.out(1.5)'
+		},
+		onStart: () => {
+			if ( settings.perspective ) {
+				gsap.set([imageElement, itemElement], {
+					perspective: settings.perspective
+				});
+			}
+		},
+		scrollTrigger: settings.scrollTrigger
+	})
+	.fromTo(imageElement, {
+		filter: 'brightness(100%) saturate(100%)',
+		'clip-path': settings.clipPaths.step1.initial
+	}, {
+		ease: 'back.in(1.5)',
+		rotationZ: 90,
+		scale: 0.6,
+		filter: 'brightness(300%) saturate(200%)',
+		'clip-path': settings.clipPaths.step1.final
+	}, 0)
+	.to(innerElements[0], {
+		ease: 'back.in(1.5)',
+		scaleX: 1.4,
+	}, 0)
+	// Switch image
+	.add(() => {
+		// Toggle the visibility of the inner elements
+		innerElements[0].classList.toggle('content__img-inner--hidden');
+		innerElements[1].classList.toggle('content__img-inner--hidden');
+	})
+	.to(imageElement, {
+		startAt: {
+			'clip-path': settings.clipPaths.step1.final, rotationZ: -90
+		},
+		'clip-path': settings.clipPaths.step2.final,
+		filter: 'brightness(100%) saturate(100%)',
+		rotationZ: 0,
+		scale: 1,
+	})
+	.to(innerElements[1], {
+		startAt: {scaleX: 1.4},
+		scaleX: 1,
+	}, '<')
+	.addLabel('texts', '<-=0.3');
+
+	charsArray.forEach((charArray, index) => {
+		charArray.sort(() => Math.random() - 0.5);
+		const staggerDirection = index % 2 === 0 ? 1 : -1; // Alternate stagger direction
+
+		tl.fromTo(charArray, {
+			opacity: 1, 
+			transformOrigin: `50% ${staggerDirection < 0 ? 100 : 0}%`, 
+			scaleY: 0
+		}, {
+			duration: 0.1,
+			ease: 'none',
+			scaleY: 1,
+			stagger: staggerDirection*0.02
+		}, 'texts');
+	});
+
+	return tl;
+}
+
+const fx6 = (itemElement, options) => {
+	// Set up the animation settings
+	const settings = setupAnimationDefaults(itemElement, options);
+	// Select the elements to animate
+	const imageElement = itemElement.querySelector('.content__img');
+	const inner = imageElement.querySelector('.content__img-inner');
+	const charsArray = prepareTextForAnimation(itemElement);
+
+	// Define and return the GSAP timeline for the animation
+	const tl = gsap.timeline({
+		// Default easing for all animations in this timeline
+		defaults: {
+			ease: 'power2.inOut'
+		},
+		// Event hook for when the timeline starts
+		onStart: () => {
+			// Apply perspective if specified
+			if ( settings.perspective ) {
+				gsap.set(imageElement, {
+					perspective: settings.perspective
+				});
+			}
+		},
+		// ScrollTrigger configuration for this timeline
+		scrollTrigger: settings.scrollTrigger
+	})
+	// The sequence of animation steps
+	.fromTo(imageElement, {
+		// Initial state for the animation
+		scale: 0.2,
+		filter: 'brightness(50%)',
+		'clip-path': settings.clipPaths.step1.initial,
+		transformOrigin: '75% 50%'
+	}, {
+		// Final state for the animation
+		scale: 1,
+		filter: 'brightness(100%)',
+		'clip-path': settings.clipPaths.step1.final
+	}, 0)
+	.fromTo(inner, {
+		// Rotation and scale effect for the inner element
+		rotationY: 40,
+		scale: 2,
+	}, {
+		// Rotation and scale effect for the inner element
+		rotationY: 0,
+		scale: 1,
+	}, 0)
+
+	charsArray.forEach((charArray, index) => {
+		const staggerDirection = index % 2 === 0 ? 1 : -1; // Alternate stagger direction
+
+		tl.fromTo(charArray, {
+			opacity: 0, 
+			scale: 1.2
+		}, {
+			opacity: 1,
+			scale: 1,
+			yPercent: staggerDirection*100,
+			stagger: staggerDirection*-0.02
+		}, 0);
+	});
+
+	return tl;
+}
+
+// First animation effect
+const fxIntro = (itemElement, options) => {
+	// Set up the animation settings
+	const settings = setupAnimationDefaults(itemElement, options);
+	// Select the elements to animate
+	const imageElement = itemElement.querySelector('.content__img');
+	const inner = imageElement.querySelector('.content__img-inner');
+	
+	// Define and return the GSAP timeline for the animation
+	return gsap.timeline({
+		// Default easing for all animations in this timeline
+		defaults: {
+			ease: 'none'
+		},
+		// Event hook for when the timeline starts
+		onStart: () => {
+			// Apply perspective if specified
+			if ( settings.perspective ) {
+				gsap.set(imageElement, {
+					perspective: settings.perspective
+				});
+			}
+		},
+		// ScrollTrigger configuration for this timeline
+		scrollTrigger: settings.scrollTrigger
+	})
+	// The sequence of animation steps
+	.fromTo(imageElement, {
+		scale: 1,
+		xPercent: 0,
+		filter: 'brightness(100%)',
+		'clip-path': settings.clipPaths.step1.initial
+	}, {
+		scale: 0.5,
+		xPercent: -50,
+		'clip-path': settings.clipPaths.step1.final,
+		filter: 'brightness(500%)',
+	}, 0)
+	.to(inner, {
+		rotationY: -40,
+		scale: 1.4,
+	}, 0)
+	.to(imageElement, {
+		startAt: {
+			'clip-path': settings.clipPaths.step2.initial
+		},
+		scale: 0,
+		xPercent: -100,
+		'clip-path': settings.clipPaths.step2.final,
+		filter: 'brightness(100%)'
+	})
+	.to(inner, {
+		startAt: {rotationY: 40},
+		rotationY: 0,
+		scale: 1,
+	}, '<');
+}
+
+// Main function to apply scroll-triggered animations
 const scroll = () => {
-	grids.forEach((grid, i) => {
-		// Determine animation type
-		let animationType;
-		switch (i % 6) {
-			case 0:
-				animationType = 'type1';
-				break;
-			case 1:
-				animationType = 'type2';
-				break;
-			case 2:
-				animationType = 'type3';
-				break;
-			case 3:
-				animationType = 'type4';
-				break;
-			case 4:
-				animationType = 'type5';
-				break;
-			case 5:
-				animationType = 'type6';
-				break;
+	// Define items and associate them with their animation profiles and options
+	const items = [
+		{
+			id: '#item-1', 
+			animationProfile: fx1,
+			interactiveTilt: true, // This item should have the InteractiveTilt effect
+			options: {
+				perspective: 1000
+			} 
+		},
+		{
+			id: '#item-2',
+			animationProfile: fx2,
+			interactiveTilt: true, // This item should have the InteractiveTilt effect
+			options: {
+				clipPaths: {
+					step1: {
+						initial: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+						final: 'polygon(40% 50%, 60% 50%, 80% 50%, 20% 50%)',
+					},
+					step2: {
+						initial: 'polygon(20% 50%, 80% 50%, 60% 50%, 40% 50%)',
+						final: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+					}
+				},
+				scrollTrigger: {
+					start: 'center bottom',
+					end: 'top top'
+				},
+				perspective: 500
+			} 
+		},
+		{
+			id: '#item-3', 
+			animationProfile: fx3,
+			options: {
+				clipPaths: {
+					step1: {
+						initial: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+						final: 'polygon(50% 0%, 50% 50%, 50% 50%, 50% 100%)',
+					},
+					step2: {
+						initial: 'polygon(50% 50%, 50% 0%, 50% 100%, 50% 50%)',
+						final: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+					}
+				},
+				scrollTrigger: {
+					start: 'center center',
+					end: '+=150%',
+					pin: true
+				},
+				perspective: 400
+			} 
+		},
+		{
+			id: '#item-4',
+			animationProfile: fx4,
+			interactiveTilt: true, // This item should have the InteractiveTilt effect
+			options: {
+				clipPaths: {
+					step1: {
+						initial: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+						final: 'polygon(40% 50%, 60% 50%, 80% 50%, 20% 50%)',
+					},
+					step2: {
+						initial: 'polygon(20% 50%, 80% 50%, 60% 50%, 40% 50%)',
+						final: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+					}
+				},
+				scrollTrigger: {
+					start: 'center bottom',
+					end: 'top top-=10%'
+				},
+				perspective: 500
+			} 
+		},
+		{
+			id: '#item-5',
+			animationProfile: fx5,
+			interactiveTilt: true, // This item should have the InteractiveTilt effect
+			options: {
+				clipPaths: {
+					step1: {
+						initial: 'polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%)',
+						final: 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%)',
+					},
+					step2: {
+						initial: 'polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%, 50% 50%)',
+						final: 'polygon(50% 0%, 80% 10%, 100% 35%, 100% 70%, 80% 90%, 50% 100%, 20% 90%, 0% 70%, 0% 35%, 20% 10%)',
+					}
+				},
+				scrollTrigger: {
+					start: 'top bottom+=20%',
+					end: 'bottom top'
+				},
+				perspective: 500
+			} 
+		},
+		{
+			id: '#item-6', 
+			animationProfile: fx6,
+			interactiveTilt: true, // This item should have the InteractiveTilt effect
+			options: {
+				clipPaths: {
+					step1: {
+						initial: 'polygon(50% 0%, 50% 50%, 50% 50%, 50% 100%)',
+						final: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+					},
+				},
+				scrollTrigger: {
+					start: 'center bottom',
+					end: '+=80%'
+				},
+				perspective: 1000
+			} 
+		},
+		{
+			id: '#item-intro', 
+			animationProfile: fxIntro,
+			interactiveTilt: true, // This item should have the InteractiveTilt effect
+			options: {
+				scrollTrigger: {
+					start: 'clamp(top bottom)',
+					end: 'center top'
+				},
+				perspective: 1000
+			} 
+		},
+	];
+
+	// Iterate over the items and apply their animations
+	items.forEach(item => {
+		const itemElement = document.querySelector(item.id);
+		// Check if element exists and has an animation profile
+		if ( itemElement && item.animationProfile ) {
+			// Apply the animation profile to the element with the specified options
+			item.animationProfile(itemElement, item.options);
+
+			// Check if the interactive tilt effect should be applied
+			if ( item.interactiveTilt ) {
+				// Instantiate the InteractiveTilt object for this item
+				new InteractiveTilt(itemElement);
+			}
+		} else {
+			// Warn if the element or animation profile is not found
+			console.warn(`Element with ID ${item.id} or its animation profile is not defined.`);
 		}
-		applyAnimation(grid, animationType);
 	});
 }
 
-// Preload images, initialize smooth scrolling, apply scroll-triggered animations, and remove loading class from body
-preloadImages('.grid__item-inner').then(() => {
+// Preloading all images specified by the selector
+preloadImages('.content__img-inner').then(() => {
+    // Once images are preloaded, remove the 'loading' indicator/class from the body
+    document.body.classList.remove('loading');
+	// Initialize Lenis
 	initSmoothScrolling();
+	// Apply scroll-triggered animations to each item
 	scroll();
-	document.body.classList.remove('loading');
 });
+
+tsParticles.load("tsparticles", {
+    background: {
+        repeat: "no-repeat",
+        size: "40%",
+        position: "60% 50%"
+    },
+    interactivity: {
+        events: {
+            onClick: {
+                enable: true,
+                mode: "repulse"
+            },
+            onHover: {
+                enable: true,
+                mode: "bubble"
+            }
+        },
+        modes: {
+            bubble: {
+                distance: 200,
+                duration: 2,
+                opacity: 0,
+                size: 0,
+                speed: 3
+            },
+            repulse: {
+                distance: 400,
+                duration: 0.4
+            }
+        }
+    },
+    particles: {
+        color: { value: "#ff98a2" },
+        move: {
+            direction: "none",
+            enable: true,
+            outModes: "out",
+            random: true,
+            speed: 0.3
+        },
+        number: {
+            density: {
+                enable: true
+            },
+            value: 900
+        },
+        opacity: {
+            animation: {
+                enable: true,
+                speed: 5
+            },
+            value: { min: 0.3, max: 0.6 }
+        },
+        shape: {
+            type: "circle"
+        },
+        size: {
+            value: 1
+        }
+    }
+});
+
+
+tsParticles.load("tsparticle", {
+    background: {
+        repeat: "no-repeat",
+        size: "40%",
+        position: "60% 50%"
+    },
+    interactivity: {
+        events: {
+            onClick: {
+                enable: true,
+                mode: "repulse"
+            },
+            onHover: {
+                enable: true,
+                mode: "bubble"
+            }
+        },
+        modes: {
+            bubble: {
+                distance: 200,
+                duration: 2,
+                opacity: 0,
+                size: 0,
+                speed: 3
+            },
+            repulse: {
+                distance: 400,
+                duration: 0.4
+            }
+        }
+    },
+    particles: {
+        color: { value: "#ff98a2" },
+        move: {
+            direction: "none",
+            enable: true,
+            outModes: "out",
+            random: true,
+            speed: 0.3
+        },
+        number: {
+            density: {
+                enable: true
+            },
+            value: 900
+        },
+        opacity: {
+            animation: {
+                enable: true,
+                speed: 5
+            },
+            value: { min: 0.3, max: 0.6 }
+        },
+        shape: {
+            type: "circle"
+        },
+        size: {
+            value: 1
+        }
+    }
+});
+
+
+
+
+// ======================= cursor
+const cursor = document.querySelector('#cursor');
+let mouse = { x: 300, y: 300 };
+let pos = { x: 0, y: 0 };
+const speed = 0.1; // between 0 and 1
+
+const updatePosition = () => {
+    pos.x += (mouse.x - pos.x) * speed;
+    pos.y += (mouse.y - pos.y) * speed;
+    cursor.style.transform = 'translate3d(' + pos.x + 'px ,' + pos.y + 'px, 0)';
+};
+const updateCoordinates = e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+}
+window.addEventListener('mousemove', updateCoordinates);
+function loop() {
+    updatePosition();
+    requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(loop);
