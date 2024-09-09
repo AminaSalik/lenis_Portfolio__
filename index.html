@@ -3,31 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500;700&family=Lobster&display=swap"rel="stylesheet"/>
-      <meta property="og:title" content="My PortFolio" />
-      <meta property="og:description" content="Explore the portfolio of Amina Salik, showcasing innovative web design, cutting-edge React.js projects, and creative front-end solutions. Discover my work, including dynamic interfaces, engaging animations, and responsive designs that bring ideas to life." />
-      <!-- <meta property="og:image" content="https://raw.githubusercontent.com/AminaSalik/Portfolio-prismic/main/Untitled%20(Recovered).png" /> -->
-      <!-- <meta property="og:url" content="https://sensational-youtiao-aeda5f.netlify.app/" /> -->
-      <meta property="og:type" content="website"/>
-    <link rel="shortcut icon" href="favicon.ico">
-		<link rel="stylesheet" href="https://use.typekit.net/eay5gla.css">
-		<link rel="stylesheet" type="text/css" href="./assets/css//base.css" />
-        <link rel="stylesheet" type="text/css" href="./assets/css/contact.css" />
-	
-	
-  </head>
+    <meta property="og:title" content="My PortFolio" />
+    <meta property="og:description" content="Explore the portfolio of Amina Salik, showcasing innovative web design" />
+    <meta property="og:type" content="website" />
+    <link rel="shortcut icon" href="./assets/img/k-removebg-preview.png" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/contact.css" />
+</head>
+
 
   <body>
    
     <main>
+
+      <div id="tsparticles"></div>
+      <div id="cursor">
+          <div class="cursor--inner"></div>
+        </div>
       <section class="">
-         <div id="tsparticle"></div>
-        <div id="cursor">
-            <div class="cursor--inner"></div>
-          </div>
+       
                 <div>             
                     <div class="intro">
+                      
                         <div id="item-intro" class="content content--intro">
                             <div class="content__img-wrap">
                                 <div class="content__img content__img--1">
@@ -65,7 +62,7 @@
                             <p class="content__text content__text--left">
                                 <span>About Me</span>
                                 <span class="content__text-tiny">
-                                    As a Junior Front-End Developer, I focus on developing my skills by mastering HTML, CSS, JavaScript, ReactJs, NextJs, Tailwind, SCSS. I specialize in designing and maintaining responsive websites that prioritize a seamless user experience. My expertise extends to crafting dynamic and engaging interfaces, leveraging clean and optimized code. I am well-versed in the latest development tools and techniques. Additionally, I am a team player who thrives in collaborating with cross-functional teams to produce outstanding web applications. 
+                                    As a Junior Front-End Developer, I focus on developing my skills by mastering HTML, CSS, JavaScript, ReactJs, NextJs, Tailwind, SCSS. I specialize in designing and maintaining responsive websites that prioritize a seamless user experience. My expertise extends to crafting dynamic and engaging interfaces, leveraging clean and optimized code. 
                                 </span>
                             </p>
                         </div>
@@ -131,7 +128,7 @@
     <!-- ------------- -->
     
     <div class="introo">
-        <div id="tsparticles"></div>
+        <!-- <div id="tsparticles"></div> -->
       <div class="introo-text">
         <h1 class="hide">
           <span class="text">Crafting innovative </span>
@@ -157,166 +154,6 @@
   <script type="module" src="./assets/js/index.js"></script>
   <script src="./assets/js/intro.js"></script>
 <script>
-  // Preloading all images specified by the selector
-preloadImages('.content__img-inner').then(() => {
-    // Once images are preloaded, remove the 'loading' indicator/class from the body
-    document.body.classList.remove('loading');
-	// Initialize Lenis
-	initSmoothScrolling();
-	// Apply scroll-triggered animations to each item
-	scroll();
-});
-
-tsParticles.load("tsparticles", {
-    background: {
-        repeat: "no-repeat",
-        size: "40%",
-        position: "60% 50%"
-    },
-    interactivity: {
-        events: {
-            onClick: {
-                enable: true,
-                mode: "repulse"
-            },
-            onHover: {
-                enable: true,
-                mode: "bubble"
-            }
-        },
-        modes: {
-            bubble: {
-                distance: 200,
-                duration: 2,
-                opacity: 0,
-                size: 0,
-                speed: 3
-            },
-            repulse: {
-                distance: 400,
-                duration: 0.4
-            }
-        }
-    },
-    particles: {
-        color: { value: "#ff98a2" },
-        move: {
-            direction: "none",
-            enable: true,
-            outModes: "out",
-            random: true,
-            speed: 0.3
-        },
-        number: {
-            density: {
-                enable: true
-            },
-            value: 900
-        },
-        opacity: {
-            animation: {
-                enable: true,
-                speed: 5
-            },
-            value: { min: 0.3, max: 0.6 }
-        },
-        shape: {
-            type: "circle"
-        },
-        size: {
-            value: 1
-        }
-    }
-});
-
-
-tsParticles.load("tsparticle", {
-    background: {
-        repeat: "no-repeat",
-        size: "40%",
-        position: "60% 50%"
-    },
-    interactivity: {
-        events: {
-            onClick: {
-                enable: true,
-                mode: "repulse"
-            },
-            onHover: {
-                enable: true,
-                mode: "bubble"
-            }
-        },
-        modes: {
-            bubble: {
-                distance: 200,
-                duration: 2,
-                opacity: 0,
-                size: 0,
-                speed: 3
-            },
-            repulse: {
-                distance: 400,
-                duration: 0.4
-            }
-        }
-    },
-    particles: {
-        color: { value: "#ff98a2" },
-        move: {
-            direction: "none",
-            enable: true,
-            outModes: "out",
-            random: true,
-            speed: 0.3
-        },
-        number: {
-            density: {
-                enable: true
-            },
-            value: 900
-        },
-        opacity: {
-            animation: {
-                enable: true,
-                speed: 5
-            },
-            value: { min: 0.3, max: 0.6 }
-        },
-        shape: {
-            type: "circle"
-        },
-        size: {
-            value: 1
-        }
-    }
-});
-
-
-
-
-// ======================= cursor
-const cursor = document.querySelector('#cursor');
-let mouse = { x: 300, y: 300 };
-let pos = { x: 0, y: 0 };
-const speed = 0.1; // between 0 and 1
-
-const updatePosition = () => {
-    pos.x += (mouse.x - pos.x) * speed;
-    pos.y += (mouse.y - pos.y) * speed;
-    cursor.style.transform = 'translate3d(' + pos.x + 'px ,' + pos.y + 'px, 0)';
-};
-const updateCoordinates = e => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-}
-window.addEventListener('mousemove', updateCoordinates);
-function loop() {
-    updatePosition();
-    requestAnimationFrame(loop);
-}
-
-requestAnimationFrame(loop);
-
+  
 </script>
 </html>

@@ -176,10 +176,15 @@ p {
   color: #282c34;
   background-color: #ff98a2;
 }
-
+.login-form-group{
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  
+}
 .btn__xl {
-  width: 280px;
-  height: 64px;
+  width: 132px;
+  height: 42px;
   font-family: 'AlphaLyrae', sans-serif;
   font-size: 18px;
   font-weight: 400;

@@ -56,7 +56,6 @@ const setupAnimationDefaults = (itemElement, options) => {
 			...options.scrollTrigger
 		};
 	}
-  
 	// Merge and return the complete settings
 	return {
 		...defaults,
@@ -64,7 +63,6 @@ const setupAnimationDefaults = (itemElement, options) => {
 		scrollTrigger: defaults.scrollTrigger
 	};
 };  
-
 // Prepares text within an element for animation by splitting it into characters and setting their initial opacity.
 const prepareTextForAnimation = itemElement => {
 	// Query for the span elements within the itemElement
@@ -320,6 +318,13 @@ const fx3 = (itemElement, options) => {
 	}, '<')
 }
 
+
+
+
+
+
+
+
 const fx4 = (itemElement, options) => {
 	// Set up the animation settings
 	const settings = setupAnimationDefaults(itemElement, options);
@@ -466,7 +471,6 @@ const fx5 = (itemElement, options) => {
 
 	return tl;
 }
-
 const fx6 = (itemElement, options) => {
 	// Set up the animation settings
 	const settings = setupAnimationDefaults(itemElement, options);
@@ -532,8 +536,6 @@ const fx6 = (itemElement, options) => {
 
 	return tl;
 }
-
-// First animation effect
 const fxIntro = (itemElement, options) => {
 	// Set up the animation settings
 	const settings = setupAnimationDefaults(itemElement, options);
@@ -591,11 +593,8 @@ const fxIntro = (itemElement, options) => {
 	}, '<');
 }
 
-// Main function to apply scroll-triggered animations
 const scroll = () => {
-	// Define items and associate them with their animation profiles and options
-	const items = [
-		
+	const items = [		
 		{
 			id: '#item-2',
 			animationProfile: fx2,
@@ -640,7 +639,6 @@ const scroll = () => {
 				perspective: 400
 			} 
 		},
-		
 		{
 			id: '#item-5',
 			animationProfile: fx5,
@@ -697,4 +695,97 @@ const scroll = () => {
 		}
 	});
 }
+preloadImages('.content__img-inner').then(() => {
+    document.body.classList.remove('loading');
+	// Initialize Lenis
+	initSmoothScrolling();
+	// Apply scroll-triggered animations to each item
+	scroll();
+});
 
+tsParticles.load("tsparticles", {
+    background: {
+        repeat: "no-repeat",
+        size: "40%",
+        position: "60% 50%"
+    },
+    interactivity: {
+        events: {
+            onClick: {
+                enable: true,
+                mode: "repulse"
+            },
+            onHover: {
+                enable: true,
+                mode: "bubble"
+            }
+        },
+        modes: {
+            bubble: {
+                distance: 200,
+                duration: 2,
+                opacity: 0,
+                size: 0,
+                speed: 3
+            },
+            repulse: {
+                distance: 400,
+                duration: 0.4
+            }
+        }
+    },
+    particles: {
+        color: { value: "#ff98a2" },
+        move: {
+            direction: "none",
+            enable: true,
+            outModes: "out",
+            random: true,
+            speed: 0.3
+        },
+        number: {
+            density: {
+                enable: true
+            },
+            value: 900
+        },
+        opacity: {
+            animation: {
+                enable: true,
+                speed: 5
+            },
+            value: { min: 0.3, max: 0.6 }
+        },
+        shape: {
+            type: "circle"
+        },
+        size: {
+            value: 1
+        }
+    }
+});
+
+
+
+
+// ======================= cursor
+const cursor = document.querySelector('#cursor');
+let mouse = { x: 300, y: 300 };
+let pos = { x: 0, y: 0 };
+const speed = 0.1; // between 0 and 1
+
+const updatePosition = () => {
+    pos.x += (mouse.x - pos.x) * speed;
+    pos.y += (mouse.y - pos.y) * speed;
+    cursor.style.transform = 'translate3d(' + pos.x + 'px ,' + pos.y + 'px, 0)';
+};
+const updateCoordinates = e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+}
+window.addEventListener('mousemove', updateCoordinates);
+function loop() {
+    updatePosition();
+    requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
