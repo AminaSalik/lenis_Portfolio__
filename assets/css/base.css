@@ -578,7 +578,27 @@ body #cdawrap {
 
 
 
+@media (min-width: 1025px) {
 
+  
+	.introo-text {
+		color: rgb(233, 233, 233);
+		font-family: 'AlphaLyrae', sans-serif;
+		font-size: 20px;
+		/* width: 60%; */
+	  }
+      
+	  .content__text-tiny {
+		text-transform: none;
+		font-family: 'Tenon', sans-serif;
+		font-size: 2.5rem;
+		font-weight: 300;
+		max-width: 660px;
+		line-height: 1.2;
+		margin-top: 10vh;
+	}
+      
+}
 
 
 
