@@ -5,6 +5,7 @@
 }
 
 
+
 @font-face {
 	font-family: 'AlphaLyrae';
 	src: url('../fonts/AlphaLyrae-Medium.woff2') format('woff2'),
@@ -203,7 +204,7 @@ body #cdawrap {
 }
 
 .intro__title-pre {
-    font-size: clamp(2rem,20vw,10rem);
+    font-size: clamp(2rem,8vw,8rem);
     color: var(--color-title);
     font-weight: 400;
     text-transform: uppercase;
@@ -221,6 +222,7 @@ body #cdawrap {
 
 .intro__info {
 	max-width: 20ch;
+	font-size: 23px;
     opacity: .6;
     margin-bottom: 4rem;
     padding-bottom: 1rem;
@@ -277,7 +279,7 @@ body #cdawrap {
 .content-wrap {
 	display: grid;
 	gap: 40vh;
-	margin-bottom: 40vh;
+	margin-bottom: 10vh;
 }
 
 .content {
@@ -600,5 +602,112 @@ body #cdawrap {
 }
 
 
+.wrapper {
+	width: 100%;
+	overflow: hidden;
+	margin-top: -139%;
+	
+	}
+	.photobanner {
+	position: relative;
+	height: 233px;
+	margin-bottom: 30px;
+	display: flex;
+	width: 100%;
+	}
+	
+	.photobanner img {
+		margin: 0px 25px;
+    /* box-shadow: 2px 2px 8px #8a8a8a; */
+    width: 307px;
+    height: 104%;
+	}
+	
+	.photobanner {
+	animation: bannermove 20s linear infinite alternate-reverse;
+	}
+	
+	@keyframes bannermove {
+	  from {
+		transform: translateX(0);
+	  }
+	  to {
+		transform: translateX(-100%);
+	  }
+	}
+	
+	@media (max-width: 768px) {
+	
+	
+		.wrapper {
+			width: 100%;
+			overflow: hidden;
+			margin-top: -58%;
+		}
 
+		.photobanner img {
+			margin: 0px 25px;
+			/* box-shadow: 2px 2px 8px #8a8a8a; */
+			width: 267px;
+			height: 104%;
+		}
+		
+	.content__text-tiny {
+
+		font-size: 1.3rem;
+		
+	}
+
+	.content__img--1 {
+		width:103vw;
+	
+	}
+	
+
+	}
+	@media (min-width:633px ) and (max-width:672px) {
+		.wrapper {
+			width: 100%;
+			overflow: hidden;
+			margin-top: -58%;
+		}
+	}
+
+	@media (min-width: 673px) and (max-width: 768px) {
+
+		.wrapper {
+			width: 100%;
+			overflow: hidden;
+			margin-top: -58%;
+		}
+	}
+
+	@media (min-width: 769px) and (max-width: 1024px) {
+
+	    .wrapper {
+			
+			margin-top: 32%;
+		}
+		
+	}
+
+
+	@media (min-width: 1025px) {
+
+		.wrapper {
+			width: 100%;
+			overflow: hidden;
+			margin-top: 26%;
+		}
+
+		.content {
+			position: relative;
+			margin-bottom: -8vh;
+		}
+
+		.grid-wrap {
+			
+			margin-top: 155%;
+		}
+	}
   

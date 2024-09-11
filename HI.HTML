@@ -1,176 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>On-Scroll 3D Grid Animations | Codrops</title>
+		<meta name="description" content="On-scroll animations for perspective image grids with different layouts." />
+		<meta name="keywords" content="on scroll animation, 3d, image grid, perspective, gsap, javascript, css grid" />
+		<meta name="author" content="Codrops" />
+	
+		
+	</head>
+   <style>
+    	.wrapper {
+	width: 100%;
+	overflow: hidden;
+}
+.photobanner {
+	position: relative;
+	height: 233px;
+	margin-bottom: 30px;
+	display: flex;
+	width: 100%;
+}
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta property="og:title" content="My PortFolio" />
-  <meta property="og:description" content="Explore the portfolio of Amina Salik, showcasing innovative web design" />
-  <meta property="og:type" content="website" />
-  <link rel="shortcut icon" href="./assets/img/aminask.png" type="image/x-icon" />
-  <link rel="stylesheet" type="text/css" href="./assets/css/base.css" />
-  <link rel="stylesheet" type="text/css" href="./assets/css/contact.css" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S5ZE0J5KZD"></script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RT1J37XNCL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+.photobanner img {
+  margin: 0px 25px;
+  box-shadow: 2px 2px 8px #8a8a8a;
+}
 
-    gtag('config', 'G-RT1J37XNCL');
-  </script>
+.photobanner {
+  animation: bannermove 50s linear infinite alternate-reverse;
+}
 
-</head>
-
-<body>
-
-  <main>
-
-    <div id="tsparticles"></div>
-    <div id="cursor">
-      <div class="cursor--inner"></div>
-    </div>
-    <section class="">
-
-      <div>
-        <div class="intro">
-
-          <div id="item-intro" class="content content--intro">
-            <div class="content__img-wrap">
-              <div class="content__img content__img--1">
-                <div class="content__img-inner" style="background-image:url(./assets/img/immg.png);"></div>
-              </div>
-            </div>
-          </div>
-          <h1 class="intro__title">
-            <span class="intro__title-pre">Amina</span>
-          </h1>
-          <span class="intro__info">Crafting dynamic and user-focused front-end solutions</span>
+@keyframes bannermove {
+  from {
+    left: 0px;
+  }
+  to {
+    left: -2700px;
+  }
+}
+   </style>
+	<body class="loading">
+		<div class="wrapper">
+            <div class="photobanner">
+          <img class="first" src="https://i.ibb.co/DfbLcN1/photo-1426901013385-803d40bd5558.jpg" alt="" />
+          <img src="https://i.ibb.co/DfbLcN1/photo-1426901013385-803d40bd5558.jpg " alt="" />
+          <img src="https://i.ibb.co/DfbLcN1/photo-1426901013385-803d40bd5558.jpg " alt="" />
+          <img src="https://i.ibb.co/DfbLcN1/photo-1426901013385-803d40bd5558.jpg " alt="" />
+          <img src="https://i.ibb.co/DfbLcN1/photo-1426901013385-803d40bd5558.jpg " alt="" />
+          <img src="https://i.ibb.co/DfbLcN1/photo-1426901013385-803d40bd5558.jpg " alt="" />
+          <img src="https://i.ibb.co/DfbLcN1/photo-1426901013385-803d40bd5558.jpg " alt="" />
+          <img src="https://i.ibb.co/DfbLcN1/photo-1426901013385-803d40bd5558.jpg " alt="" />
+          <img src="https://i.ibb.co/DfbLcN1/photo-1426901013385-803d40bd5558.jpg " alt="" />
+          <img src="https://i.ibb.co/DfbLcN1/photo-1426901013385-803d40bd5558.jpg " alt="" />
+        </div>
         </div>
 
-        <div class="content-wrap">
-          <div id="item-2" class="content">
-            <div class="content__img-wrap">
-              <div class="content__img content__img--1">
-                <div class="content__img-inner" style="background-image:url(./assets/img/5.jpg);"></div>
-                <div class="content__img-inner content__img-inner--hidden"
-                  style="background-image:url(./assets/img/6.jpg);"></div>
-              </div>
-            </div>
-            <p class="content__text content__text--left"><span>I'm here to craft user interfaces </span> <span>and web
-                applications</span></p>
-          </div>
 
-          <div id="item-3" class="content">
-            <div class="content__img-wrap">
-              <div class="content__img content__img--2">
-                <div class="content__img-inner" style="background-image:url(./assets/img/color_profil.png);"></div>
-                <div class="content__img-inner content__img-inner--hidden"
-                  style="background-image:url(./assets/img/profil.png);"></div>
-              </div>
-            </div>
-            <p class="content__text content__text--left">
-              <span>About Me</span>
-              <span class="content__text-tiny">
-                As a Junior Front-End Developer, I focus on developing my skills by mastering HTML, CSS, JavaScript,
-                ReactJs, NextJs, Tailwind, SCSS. I specialize in designing and maintaining responsive websites that
-                prioritize a seamless user experience. My expertise extends to crafting dynamic and engaging interfaces,
-                leveraging clean and optimized code.
-              </span>
-            </p>
-          </div>
-          <div id="item-5" class="content">
-            <div class="content__img-wrap">
-              <div class="content__img content__img--5">
-                <div class="content__img-inner" style="background-image:url(img/profil.png);"></div>
-                <div class="content__img-inner content__img-inner--hidden"
-                  style="background-image:url(./assets/img/profil.png);"></div>
-              </div>
-            </div>
-            <p class="content__text content__text--left"><span>My projects</span></p>
-          </div>
-          <div class="content">
-            <h2 class="content__title">Discover More Projects I've Built</h2>
-            <div class="card-wrap">
-              <div class="card">
-                <a href="https://aminasalik.github.io/rest-countries-api/" class="card__image"
-                  style="background-image:url(./assets/img/ct.png)"></a>
-                <p class="card__title"><a href="https://aminasalik.github.io/rest-countries-api/">rest-countries-api</a>
-                </p>
-              </div>
-              <div class="card">
-                <a href="https://aminasalik.github.io/LoopStudiosFini/" class="card__image"
-                  style="background-image:url(./assets/img/ld.png)"></a>
-                <p class="card__title"><a href="https://aminasalik.github.io/LoopStudiosFini/">landing page</a></p>
-              </div>
-              <div class="card">
-                <a href="https://main--mellifluous-rugelach-ab72dd.netlify.app/" class="card__image"
-                  style="background-image:url(./assets/img/por.png)"></a>
-                <p class="card__title"><a href="https://main--mellifluous-rugelach-ab72dd.netlify.app/">portfolio</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="app app__dark">
-          <header class="app-header">
-            <h1 class="">GET IN TOUCH</h1>
-          </header>
+<!--         
+		<script src="https://tympanus.net/codrops/adpacks/cda_sponsor.js"></script>
+		<script src="/assets/js_imgs/gsap.min.js"></script>
+		<script src="/assets/js_imgs/ScrollTrigger.min.js"></script>
+		<script src="/assets/js_imgs/lenis.min.js"></script>
+		<script src="/assets/js_imgs/imagesloaded.pkgd.min.js"></script>
+		<script type="module" src="/assets/js_imgs/index.js"></script>
 
-          <form class="login">
 
-            <div class="login-input-group">
-              <div class="login-floating-label-form-group login-floating-label-form-group__dark">
-                <label></label>
-                <input class="login-form-control login-form-control__dark" type="gmail" name="What's your email"
-                  placeholder="What's your email" />
-                <p class="help-block text-danger"></p>
-              </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
-              <div class="login-floating-label-form-group login-floating-label-form-group__dark">
-                <label>What do you want to say</label>
-                <input class="login-form-control login-form-control__dark" type="" name=""
-                  placeholder="What do you want to say" />
-                <p class="help-block text-danger"></p>
-              </div>
-            </div>
 
-            <div class="login-form-group">
-              <button type="submit" class="btn btn__dark btn__xl">save</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <div class="introo">
-    <div class="introo-text">
-      <h1 class="hide">
-        <span class="text">Crafting innovative </span>
-      </h1>
-      <h1 class="hide">
-        <span class="text">solutions with code – welcome to</span>
-      </h1>
-      <h1 class="hide">
-        <span class="text">my developer portfolio</span>
-      </h1>
-    </div>
-  </div>
-
-</body>
-
-<script src="./assets/js/imagesloaded.pkgd.min.js"></script>
-<script src="./assets/js/splitting.min.js"></script>
-<script src="./assets/js/gsap.min.js"></script>
-<script src="./assets/js/ScrollTrigger.min.js"></script>
-<script src="./assets/js/lenis.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.8.0"></script>
-<script type="module" src="./assets/js/index.js"></script>
-<script src="./assets/js/intro.js"></script>
-<script>
-
-</script>
-
+   
+	</body>
 </html>
