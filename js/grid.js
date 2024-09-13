@@ -51,7 +51,7 @@ export class Grid {
         this.DOM.el = DOM_el;
         this.DOM.imageCells = [...this.DOM.el.querySelectorAll('.grid__cell-img')];
         this.DOM.imageCells.forEach(el => this.imageCellArr.push(new ImageCell(el)));
-        this.DOM.content = document.querySelector('.content');
+        this.DOM.content = document.querySelector('.content______');
         this.DOM.backCtrl = this.DOM.content.querySelector('.back');
         this.DOM.miniGrid.el = this.DOM.content.querySelector('.grid--mini');
         this.DOM.miniGrid.cells = [...this.DOM.miniGrid.el.querySelectorAll('.grid__cell')];

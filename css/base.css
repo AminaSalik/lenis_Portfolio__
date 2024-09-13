@@ -1,17 +1,10 @@
-*,
-*::after,
-*::before {
-	box-sizing: border-box;
-}
 
-:root {
-	font-size: 15px;
-}
 
-body {
+
+.grid_zoom {
 	margin: 0;
 	--color-text: #000;
-	--color-bg: #f7f5ee;
+	/* --color-bg: #edba00; */
 	--color-link: #000;
 	--color-link-hover: #000;
 	color: var(--color-text);
@@ -121,6 +114,7 @@ a:focus-visible {
 	display: inline-block;
 	transform-origin: 0% 50%;
 	will-change: transform;
+	color: white;
 }
 
 .frame {
@@ -221,7 +215,7 @@ a:focus-visible {
 	cursor: pointer;
 }
 
-.content {
+.content______ {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -235,7 +229,7 @@ a:focus-visible {
 	justify-content: space-between;
 }
 
-.content__item {
+.content__item__ {
 	position: absolute;
 	opacity: 0;
 	display: grid;
@@ -262,6 +256,7 @@ a:focus-visible {
 .content__item-text {
 	max-width: 30ch;
 	margin-bottom: 2rem;
+	color: white;
 }
 
 .content__item-link {
@@ -321,10 +316,12 @@ a:focus-visible {
     cursor: pointer;
     width: 50px;
 }
-
 .back svg {
-	stroke-linecap: round;
+    stroke-linecap: round;
+    stroke: white;
+    fill: white; /* If you want the inside of the SVG to be white as well */
 }
+
 
 .back:hover,
 .back:focus {
@@ -334,10 +331,12 @@ a:focus-visible {
 
 .content--open .back {
 	pointer-events: auto;
+	/* filter: grayscale(100%) sepia(100%) hue-rotate(-56deg) saturate(300%) brightness(90%); */
+
 }
 
 @media screen and (min-width: 53em) {
-	.content {
+	.content______ {
 		width: 38%;
 	}
 	.grid {
